@@ -55,3 +55,10 @@ variable "bastion_sg_tags" {
     Component = "bastion"
   }
 }
+
+variable "app_alb_sg_tags" {
+  type = map(any)
+  default = {
+    Component = "app-alb"
+  }
+}
