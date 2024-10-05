@@ -9,6 +9,8 @@ module "app_alb" {
   create_security_group = false
   security_groups       = [data.aws_ssm_parameter.app_alb_sg_id.value]
 
+  enable_deletion_protection = false
+
   tags = merge(
     var.common_tags,
     var.app_alb_tags
