@@ -49,6 +49,9 @@ variable "ansible_sg_tags" {
   }
 }
 
+################
+# bastion tags #
+################
 variable "bastion_sg_tags" {
   type = map(any)
   default = {
@@ -56,9 +59,47 @@ variable "bastion_sg_tags" {
   }
 }
 
+variable "bastion_to_backend_ports" {
+  type    = list(number)
+  default = [22, 8080]
+}
+
+variable "bastion_to_frontend_ports" {
+  type    = list(number)
+  default = [22, 80]
+}
+
+################
+# app-alb tags #
+################
 variable "app_alb_sg_tags" {
   type = map(any)
   default = {
     Component = "app-alb"
   }
+}
+
+############
+# vpn tags #
+############
+variable "vpn_sg_tags" {
+  type = map(any)
+  default = {
+    Component = "vpn"
+  }
+}
+
+variable "public_to_vpn_ports" {
+  type    = list(number)
+  default = [22, 443, 943, 1194]
+}
+
+variable "vpn_to_backend_ports" {
+  type    = list(number)
+  default = [22, 8080]
+}
+
+variable "vpn_to_frontend_ports" {
+  type    = list(number)
+  default = [22, 80]
 }

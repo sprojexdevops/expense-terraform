@@ -17,14 +17,9 @@ variable "common_tags" {
   }
 }
 
-variable "app_alb_tags" {
+variable "vpn_tags" {
   type = map(any)
   default = {
-    Component = "application-alb"
+    Component = "vpn"
   }
-}
-
-variable "zone_name" {
-  type    = string
-  default = "sprojex.in"
 }
