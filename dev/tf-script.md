@@ -4,3 +4,6 @@
 
 ## Run the below command from main folder to apply all using script in a sequence of folders
     for i in $(ls -d */) ; do echo ${i%/}; cd  ${i%/} ; terraform apply -auto-approve ; cd .. ; done
+
+
+> here the main folder is dev and other sub-folders have the tf files, while running the above commands pwd should point to 'dev'
