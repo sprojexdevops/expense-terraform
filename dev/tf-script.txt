@@ -1,7 +1,0 @@
-# Run the below command from main folder to destroy all using script in reverse order of folders
-
-for i in $(ls -dr */) ; do echo ${i%/}; cd  ${i%/} ; terraform destroy -auto-approve ; cd .. ; done
-
-
-# Run the below command from main folder to apply all using script in a sequence of folders
-for i in $(ls -d */) ; do echo ${i%/}; cd  ${i%/} ; terraform apply -auto-approve ; cd .. ; done
