@@ -8,6 +8,10 @@ variable "environment" {
   default = "dev"
 }
 
+variable "region" {
+  default = "us-east-1"
+}
+
 variable "common_tags" {
   type = map(any)
   default = {
