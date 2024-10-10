@@ -13,3 +13,6 @@
     for i in 50-app-alb 40-rds 35-vpn 20-sg 10-vpc ; do echo ${i%/}; cd  ${i%/} ; terraform destroy -auto-approve ; cd .. ; done
 
 > here the main folder is dev and other sub-folders have the tf files, while running the above commands pwd should point to 'dev'
+
+## Resolving the state lock: If there is no other process still running: run this command
+    terraform force-unlock <ID of the lock info error>

@@ -27,3 +27,7 @@ variable "backend_tags" {
     Component = "backend"
   }
 }
+
+variable "zone_name" {
+  default = "sprojex.in"
+}
