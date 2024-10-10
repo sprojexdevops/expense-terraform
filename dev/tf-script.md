@@ -16,3 +16,5 @@
 
 ## Resolving the state lock: If there is no other process still running: run this command
     terraform force-unlock <ID of the lock info error>
+
+> eg: terraform force-unlock f1ba3f7f-cbc1-9bca-a011-95abbca52d9d
