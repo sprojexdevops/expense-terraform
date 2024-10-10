@@ -1,6 +1,6 @@
 # Expense Architecture
 
-![alt text](/dev/expense-infra.svg)
+![alt text](expense-infra.svg)
 
 # Terraform: Taint
 
