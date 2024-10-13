@@ -79,6 +79,21 @@ variable "app_alb_sg_tags" {
   }
 }
 
+################
+# web-alb tags #
+################
+variable "web_alb_sg_tags" {
+  type = map(any)
+  default = {
+    Component = "web-alb"
+  }
+}
+
+variable "public_to_web_alb_ports" {
+  type    = list(number)
+  default = [443, 80]
+}
+
 ############
 # vpn tags #
 ############

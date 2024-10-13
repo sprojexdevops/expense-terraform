@@ -60,6 +60,16 @@ module "app_alb_sg" {
   sg_tags      = var.app_alb_sg_tags
 }
 
+module "web_alb_sg" {
+  source       = "git::https://github.com/sprojexdevops/terraform-modules.git//modules/sg?ref=main"
+  project_name = var.project_name
+  environment  = var.environment
+  sg_name      = "web-alb"
+  vpc_id       = local.vpc_id
+  common_tags  = var.common_tags
+  sg_tags      = var.web_alb_sg_tags
+}
+
 module "vpn_sg" {
   source       = "git::https://github.com/sprojexdevops/terraform-modules.git//modules/sg?ref=main"
   project_name = var.project_name
@@ -199,6 +209,37 @@ resource "aws_security_group_rule" "app_alb_bastion" {
   protocol                 = "tcp"
   source_security_group_id = module.bastion_sg.sg_id
   security_group_id        = module.app_alb_sg.sg_id
+}
+
+resource "aws_security_group_rule" "app_alb_frontend" {
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  source_security_group_id = module.frontend_sg.sg_id
+  security_group_id        = module.app_alb_sg.sg_id
+}
+
+###########################
+# Rules for web-alb ports #
+###########################
+resource "aws_security_group_rule" "frontend_web_alb" {
+  type                     = "ingress"
+  from_port                = 80
+  to_port                  = 80
+  protocol                 = "tcp"
+  source_security_group_id = module.web_alb_sg.sg_id
+  security_group_id        = module.frontend_sg.sg_id
+}
+
+resource "aws_security_group_rule" "web_alb_public" {
+  count             = length(var.public_to_web_alb_ports)
+  type              = "ingress"
+  from_port         = var.public_to_web_alb_ports[count.index]
+  to_port           = var.public_to_web_alb_ports[count.index]
+  protocol          = "tcp"
+  cidr_blocks       = ["0.0.0.0/0"]
+  security_group_id = module.web_alb_sg.sg_id
 }
 
 #######################
